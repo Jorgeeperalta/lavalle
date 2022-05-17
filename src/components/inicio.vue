@@ -49,7 +49,7 @@
                     Veronica
                   </h1>
                   <h4 class="subheading">
-                    Gimnasio integral
+                    Sistema integral ganadero
                   </h4>
                 </v-col>
               </v-row>
