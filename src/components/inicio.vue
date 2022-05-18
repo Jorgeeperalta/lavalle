@@ -1,16 +1,16 @@
 <template>
   <v-app>
     <v-sheet id="scrolling-techniques-4" class="overflow-y-auto">
-      <v-app-bar
+    <v-app-bar
         absolute
         color="purple accent-4"
         dark
         shrink-on-scroll
         prominent
-        src=""
+        src="https://picsum.photos/1920/1080?random"
         fade-img-on-scroll
-        scroll-target="#scrolling-techniques-4"
-        scroll-threshold="100"
+        scroll-target="#scrolling-techniques-5"
+        scroll-threshold="150"
       >
         <template v-slot:img="{ props }">
           <v-img
@@ -18,19 +18,12 @@
             gradient="to top right, rgba(55,236,186,.7), rgba(25,32,72,.7)"
           ></v-img>
         </template>
+        <v-btn icon  href="/login">
+          <v-icon >mdi-account</v-icon>
+        </v-btn>
+       
+
         <v-spacer></v-spacer>
-        <div >
-          <h6>Ingresar</h6>
-          <v-btn icon href="/login">
-            <v-icon>mdi-login</v-icon>
-          </v-btn>
-        </div>
-        <!-- <div v-else>
-          <h6>Cerrar Sesion</h6>
-          <v-btn @click="cerrar">
-            <v-icon>mdi-login</v-icon>
-          </v-btn>
-        </div> -->
       </v-app-bar>
     </v-sheet>
 
@@ -40,7 +33,7 @@
           <template>
             <v-parallax
               dark
-              src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
+                 src="https://picsum.photos/1920/1080?random"
               height="900"
             >
               <v-row align="center" justify="center">

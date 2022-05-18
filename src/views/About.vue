@@ -1,28 +1,16 @@
 <template>
   <v-app id="inspire">
-    <v-app-bar
-      app
-      color="white"
-      flat
-    >
-      <v-container class="py-0 fill-height">
-        <v-avatar
-          class="mr-10"
-          color="grey darken-1"
-          size="32"
-        ></v-avatar>
-
-        <v-btn
-          v-for="link in links"
-          :key="link"
-          text
-        >
-          {{ link }}
-        </v-btn>
+    <v-img :src="require('@/assets/86708-vacas.jpg')">
+      <v-app-bar app clipped-right flat height="72">
+        <v-icon @click="(drawer = !drawer), (mini = !mini)">
+          {{ mini ? "mdi-format-list-bulleted" : "mdi-dots-vertical" }}
+        </v-icon>
+        <v-spacer></v-spacer>
+        <h3>{{ title }}</h3>
 
         <v-spacer></v-spacer>
 
-        <v-responsive max-width="260">
+        <v-responsive max-width="156">
           <v-text-field
             dense
             flat
@@ -31,66 +19,74 @@
             solo-inverted
           ></v-text-field>
         </v-responsive>
-      </v-container>
-    </v-app-bar>
+      </v-app-bar>
 
-    <v-main class="grey lighten-3">
-      <v-container>
-        <v-row>
-          <v-col cols="2">
-            <v-sheet rounded="lg">
-              <v-list color="transparent">
-                <v-list-item
-                  v-for="n in 5"
-                  :key="n"
-                  link
-                >
-                  <v-list-item-content>
-                    <v-list-item-title>
-                      List Item {{ n }}
-                    </v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
+      <v-navigation-drawer v-model="drawer" absolute color="grey lighten-3">
+        <v-avatar
+          class="d-block text-center mx-auto mt-4"
+          color="grey darken-1"
+          size="36"
+          ><img :src="require('@/assets/20210620_165438.jpg')"></v-avatar>
 
-                <v-divider class="my-2"></v-divider>
+        <v-divider class="mx-3 my-5"></v-divider>
 
-                <v-list-item
-                  link
-                  color="grey lighten-4"
-                >
-                  <v-list-item-content>
-                    <v-list-item-title>
-                      Refresh
-                    </v-list-item-title>
-                  </v-list-item-content>
-                </v-list-item>
-              </v-list>
-            </v-sheet>
-          </v-col>
+        <div
+          v-for="n in pantalla"
+          :key="n.id"
+          class="d-block text-center mx-auto mb-1"
+          color="grey lighten-1"
+          size="28"
+        >
+          <v-label style="text-align: left" outlined @click="content(n)" block>
+            <v-icon>{{ n.mdi }}</v-icon>
+            {{ n.name }}</v-label
+          >
+        </div>
+      </v-navigation-drawer>
 
-          <v-col>
-            <v-sheet
-              min-height="70vh"
-              rounded="lg"
-            >
-              <!--  -->
-            </v-sheet>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-main>
+      <v-main>
+        {{ numero }}
+      </v-main>
+      <v-responsive max-width="156">
+        <v-footer app color="grey blue-3" height="72" inset>
+          <v-text-field
+            background-color="grey lighten-2"
+            dense
+            flat
+            hide-details
+            rounded
+            solo
+          ></v-text-field>
+          <!-- <v-btn>Buscar</v-btn> -->
+        </v-footer>
+      </v-responsive>
+    </v-img>
   </v-app>
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      links: [
-        'Dashboard',
-        'Messages',
-        'Profile',
-        'Updates',
-      ],
-    }),
-  }
+export default {
+  data: () => ({
+    drawer: true,
+    mini: true,
+    numero: 0,
+    title: "",
+    pantalla: [
+      { id: 1, name: "usuarios", mdi: "mdi-airballoon" },
+      { id: 2, name: "establecimentos", mdi: "mdi-skype" },
+      { id: 3, name: "categoriaGanado", mdi: "mdi-soccer" },
+      { id: 4, name: "potreros", mdi: "mdi-smoking" },
+      { id: 5, name: "cantGanado", mdi: "mdi-star-half" },
+    ],
+  }),
+  computed: {},
+  mounted() {},
+  methods: {
+    content(n) {
+      this.numero = n;
+      console.log(n);
+      this.title = n.name;
+    },
+  },
+};
 </script>
