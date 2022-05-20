@@ -1,12 +1,12 @@
 <template>
   <v-app id="inspire">
-    <v-img :src="require('@/assets/86708-vacas.jpg')">
-      <v-app-bar app clipped-right flat height="72">
+    <v-img  :src="require('@/assets/86708-vacas.jpg')">
+      <v-app-bar color="grey darken-1" app clipped-right flat height="72">
         <v-icon @click="(drawer = !drawer), (mini = !mini)">
           {{ mini ? "mdi-format-list-bulleted" : "mdi-dots-vertical" }}
         </v-icon>
         <v-spacer></v-spacer>
-        <h3>{{ title }}</h3>
+        <h3 style="text-align:center">{{ title }}</h3>
 
         <v-spacer></v-spacer>
 
@@ -17,11 +17,12 @@
             hide-details
             rounded
             solo-inverted
+             background-color="grey lighten-2"
           ></v-text-field>
         </v-responsive>
       </v-app-bar>
 
-      <v-navigation-drawer v-model="drawer" absolute color="grey lighten-3">
+      <v-navigation-drawer v-model="drawer" absolute color="grey lighten-2" >
         <v-avatar
           class="d-block text-center mx-auto mt-4"
           color="grey darken-1"
@@ -37,18 +38,39 @@
           color="grey lighten-1"
           size="28"
         >
-          <v-label style="text-align: left" outlined @click="content(n)" block>
+          <h4 style="text-align: left" outlined @click="content(n)" block>
             <v-icon>{{ n.mdi }}</v-icon>
-            {{ n.name }}</v-label
+            {{ n.name }}</h4
           >
         </div>
       </v-navigation-drawer>
 
-      <v-main>
+      <!-- <v-main >
+        <v-container @click="drawer=false">
+           
         {{ numero }}
-      </v-main>
+        </v-container>
+      </v-main> -->
+       <v-main >
+      <v-container>
+        <v-row>
+          
+
+          <v-col>
+            <v-sheet
+              color="black"
+              min-height="70vh"
+              rounded="lg"
+               @click="drawer=false, mini = !mini"
+            > 
+             <establecimientos v-if="title == 'ESTABLECIMIENTOS'"></establecimientos>
+            </v-sheet>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-main>
       <v-responsive max-width="156">
-        <v-footer app color="grey blue-3" height="72" inset>
+        <v-footer app color="grey darken-1" height="72" inset>
           <v-text-field
             background-color="grey lighten-2"
             dense
@@ -65,18 +87,22 @@
 </template>
 
 <script>
+import establecimientos from "../components/Establecimientos.vue"
 export default {
+  components:{
+        establecimientos
+  },
   data: () => ({
     drawer: true,
     mini: true,
     numero: 0,
     title: "",
     pantalla: [
-      { id: 1, name: "usuarios", mdi: "mdi-airballoon" },
-      { id: 2, name: "establecimentos", mdi: "mdi-skype" },
-      { id: 3, name: "categoriaGanado", mdi: "mdi-soccer" },
-      { id: 4, name: "potreros", mdi: "mdi-smoking" },
-      { id: 5, name: "cantGanado", mdi: "mdi-star-half" },
+      { id: 1, name: "ESTABLECIMIENTOS", mdi: "mdi-checkbox-blank-outline" },
+      { id: 2, name: "POTREROS", mdi: "mdi-shape-polygon-plus" },
+      { id: 3, name: "ANIMALES", mdi: "mdi-cow" },
+      { id: 4, name: "GRUPOS/CATEGORIAS", mdi: "mdi-sitemap" },
+      { id: 5, name: "PANEL DE CONTROL", mdi: "mdi-timetable" },
     ],
   }),
   computed: {},
