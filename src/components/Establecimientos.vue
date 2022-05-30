@@ -26,12 +26,12 @@
               Nuevo Item
             </v-btn>
           </template>
-          <v-alert border="top">
+          
             <v-card>
               <v-card-title>
                 <span class="text-h5">{{ formTitle }}</span>
               </v-card-title>
-
+               <v-divider></v-divider>
               <v-card-text>
                 <v-container>
                   <v-row>
@@ -84,7 +84,7 @@
                 <v-btn color="green" outlined @click="save"> Gardar </v-btn>
               </v-card-actions>
             </v-card>
-          </v-alert>
+         
         </v-dialog>
         <v-dialog v-model="dialogDelete" max-width="500px">
           <v-card>

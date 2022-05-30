@@ -22,29 +22,51 @@
           ></v-text-field>
         </v-responsive> -->
 
-        <div class="text-center">
+        <div id="settings-wrapper">
           <v-menu
+            rounded="lg"
+            style="margin-top: -150px"
             v-model="menu"
             :close-on-content-click="false"
             :nudge-width="200"
-            offset-x
+            nudge-left="20"
+            offset-y
+            origin="top right"
+            content-class="v-settings"
           >
             <template v-slot:activator="{ on, attrs }">
-              <v-btn
-                style="margin-top: 100px"
-                v-show="!hidden"
-                color="pink"
-                fab
+              <v-card
+                id="settings"
+                class="py-2 px-4"
+                color="rgba(0, 0, 0, .3)"
                 dark
-                small
-                absolute
-                bottom
-                right
-                v-bind="attrs"
-                v-on="on"
+                flat
+                link
+                min-width="100"
+                min-height="50"
+                style="
+                  position: fixed;
+                  top: 115px;
+                  right: -35px;
+                  border-radius: 8px;
+                  z-index: 1;
+                "
               >
-                <v-icon>mdi-plus</v-icon>
-              </v-btn>
+                <v-icon
+                  v-show="!hidden"
+                  style="top: 0px"
+                  fab
+                  color="rgba(0, 0, 0, .3)"
+                  x-large
+                  absolute
+                  bottom
+                  left
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  mdi-cog</v-icon
+                >
+              </v-card>
             </template>
 
             <v-card>
@@ -121,7 +143,7 @@
           size="28"
         >
           <h4
-            onMouseover="this.style.color='green'"
+            onMouseover="this.style.color='red'"
             onMouseout="this.style.color='black'"
             style="text-align: left"
             outlined
@@ -228,3 +250,16 @@ export default {
   },
 };
 </script>
+<style lang="sass">
+.v-settings
+  .v-item-group > *
+    cursor: pointer
+
+  &__item
+    border-width: 3px
+    border-style: solid
+    border-color: transparent !important
+
+    &--active
+      border-color: #00cae3 !important
+</style>
