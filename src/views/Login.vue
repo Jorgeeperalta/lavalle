@@ -10,9 +10,7 @@
           height="400"
           v-if="recuperar == 0"
         >
-          <v-card-title class="text-h5 grey lighten-2">
-            Login
-          </v-card-title>
+          <v-card-title class="text-h5 grey lighten-2"> Login </v-card-title>
 
           <!-- <v-parallax
         src="https://imgsvr.radiocut.site/get/thumb/600/600/cuts_logos/d5/6c/d56c8368-b37f-4997-8cf6-328b2262cdcd.jpg"
@@ -134,6 +132,9 @@ export default {
 
         result.then((data) => {
           sessionStorage.token = data.data.token;
+          sessionStorage.user = data.data.user.name;
+          sessionStorage.role = data.data.user.role;
+          sessionStorage.id = data.data.user.id;
           console.log(data.data.token);
           console.log(data);
           this.muestraPantalla();

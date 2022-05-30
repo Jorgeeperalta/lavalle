@@ -7,12 +7,16 @@
 </template>
 
 <script>
+//import { get } from "./getProvince";
 
 export default {
   name: 'App',
-
+  dark: false,
   data: () => ({
     //
   }),
+  mounted(){
+  //  get()
+  }
 };
 </script>
