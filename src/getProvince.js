@@ -23,5 +23,5 @@ const get = async () => {
     console.log(e)
   }
 }
-module.exports ={get}
+ exports = get
   

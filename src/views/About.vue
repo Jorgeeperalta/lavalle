@@ -242,14 +242,19 @@ export default {
     this.usuarioNombre = sessionStorage.user;
     console.log(this.usuarioNombre);
     this.initialize();
+    this.comprueba()
   },
   methods: {
+    comprueba(){
+       if(!sessionStorage.token){
+             window.location = "/";
+       }
+    },
     logout() {
-       this.$store.commit("logout");
-         window.location = "/";
+      this.$store.commit("logout");
+      window.location = "/";
     },
     initialize() {
-      
       var myHeaders = new Headers();
       myHeaders.append("Authorization", "Bearer " + sessionStorage.token + "");
       myHeaders.append("Cookie", "lang=en");
@@ -259,29 +264,29 @@ export default {
         headers: myHeaders,
         redirect: "follow",
       };
-     
-        async function asyncData() {
-          const response = await fetch(
-            "http://localhost:3001/api/pantallas",
-            requestOptions
-          );
-          const data = await response.json();
 
-          return data;
+      async function asyncData() {
+        const response = await fetch(
+          "http://localhost:3001/api/pantallas",
+          requestOptions
+        );
+        const data = await response.json();
+
+        return data;
+      }
+
+      const result = asyncData();
+
+      result.then((data) => {
+        this.pantalla = data;
+        this.pantalla = this.pantalla.result;
+        console.log(data);
+      });
+      setTimeout(() => {
+        if (this.pantalla == "") {
+          window.location = "/login";
         }
-
-        const result = asyncData();
-
-        result.then((data) => {
-          this.pantalla = data;
-          this.pantalla = this.pantalla.result;
-          console.log(data);
-        });
-       setTimeout(() => {
-           if (this.pantalla=='') {
-               window.location = "/login";
-       }
-       },500)
+      }, 500);
     },
     content(n) {
       this.numero = n;

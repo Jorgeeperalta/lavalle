@@ -234,14 +234,15 @@ export default {
         console.log(data);
       });
 
-      setTimeout(() =>{
-        this.comprueba()
-      },7300000)
+      setTimeout(() => {
+        this.comprueba();
+      }, 7300000);
     },
-     comprueba(){
-          console.log(sessionStorage.token)
-             window.location = "/";
-     },
+    comprueba() {
+      this.$store.commit("logout");
+      console.log(sessionStorage.token);
+      window.location = "/";
+    },
     editItem(item) {
       this.editedItem = item;
       this.pkItem = item.id;
