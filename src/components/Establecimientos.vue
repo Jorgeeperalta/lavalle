@@ -240,6 +240,7 @@ export default {
     },
      comprueba(){
           console.log(sessionStorage.token)
+             window.location = "/";
      },
     editItem(item) {
       this.editedItem = item;

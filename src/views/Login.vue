@@ -102,6 +102,7 @@ export default {
   created() {},
   methods: {
     comprobar() {
+      console.log(this.$store.state.url)
       var obj = this;
 
       sessionStorage.token = 1;

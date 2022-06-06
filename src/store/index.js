@@ -9,15 +9,13 @@ export default new Vuex.Store({
     provincias: [],
     municipio: [],
     municipios: [],
-    url: ''
+    url: API_URL
   },
   mutations: {
     logout(){
       sessionStorage.removeItem('token');
     },
-    url(state){
-       state.url =  API_URL
-    },
+   
     getMunicipios(state) {
       try {
         async function asyncData() {
