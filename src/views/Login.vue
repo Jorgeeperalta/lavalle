@@ -79,6 +79,7 @@
 export default {
   components: {},
   data: () => ({
+    ruta: "",
     emailRules: [
       (v) => !!v || "E-mail o nombre de usuario es requerido",
       (v) => /.+@.+/.test(v) || "E-mail must be valid",
@@ -98,8 +99,11 @@ export default {
       min: (v) => v.length >= 8 || "Minimo 8 caracteres",
     },
   }),
+  created() {},
   methods: {
     comprobar() {
+      var obj = this;
+
       sessionStorage.token = 1;
       if (this.usuario != "" && this.password != "") {
         var myHeaders = new Headers();
@@ -120,7 +124,7 @@ export default {
 
         async function asyncData() {
           const response = await fetch(
-            "http://localhost:3001/api/auth/login",
+            `${obj.$store.state.url}auth/login`,
             requestOptions
           );
           const data = await response.json();
@@ -141,6 +145,8 @@ export default {
         });
       }
     },
+
+   
 
     muestraPantalla() {
       if (sessionStorage.token == "undefined") {

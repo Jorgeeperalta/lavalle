@@ -1,13 +1,12 @@
 <template>
   <v-data-table
-    
     :headers="headers"
     :items="establecimientos"
     sort-by="ubicacion"
     class="elevation-5"
   >
     <template v-slot:top>
-      <v-toolbar  flat>
+      <v-toolbar flat>
         <v-toolbar-title outlined color="" flat
           >ESTABLECIMIENTOS</v-toolbar-title
         >
@@ -26,65 +25,64 @@
               Nuevo Item
             </v-btn>
           </template>
-          
-            <v-card>
-              <v-card-title>
-                <span class="text-h5">{{ formTitle }}</span>
-              </v-card-title>
-               <v-divider></v-divider>
-              <v-card-text>
-                <v-container>
-                  <v-row>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.name"
-                        label="Nombre"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
-                        v-model="editedItem.ubicacion"
-                        label="Ubicacion"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-select
-                        :items="countries"
-                        item-text="name"
-                        item-value="name"
-                        v-model="editedItem.pkCountry"
-                      >
-                      </v-select>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-select
-                        :items="province"
-                        item-text="nombre"
-                        item-value="name"
-                        v-model="editedItem.pkProvince"
-                      >
-                      </v-select>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-select
-                        :items="municipios"
-                        item-text="nombre"
-                        item-value="name"
-                        v-model="editedItem.pkState"
-                      >
-                      </v-select>
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-card-text>
 
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="red" outlined @click="close"> Cancelar </v-btn>
-                <v-btn color="green" outlined @click="save"> Gardar </v-btn>
-              </v-card-actions>
-            </v-card>
-         
+          <v-card>
+            <v-card-title>
+              <span class="text-h5">{{ formTitle }}</span>
+            </v-card-title>
+            <v-divider></v-divider>
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-text-field
+                      v-model="editedItem.name"
+                      label="Nombre"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-text-field
+                      v-model="editedItem.ubicacion"
+                      label="Ubicacion"
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-select
+                      :items="countries"
+                      item-text="name"
+                      item-value="name"
+                      v-model="editedItem.pkCountry"
+                    >
+                    </v-select>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-select
+                      :items="province"
+                      item-text="nombre"
+                      item-value="name"
+                      v-model="editedItem.pkProvince"
+                    >
+                    </v-select>
+                  </v-col>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-select
+                      :items="municipios"
+                      item-text="nombre"
+                      item-value="name"
+                      v-model="editedItem.pkState"
+                    >
+                    </v-select>
+                  </v-col>
+                </v-row>
+              </v-container>
+            </v-card-text>
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="red" outlined @click="close"> Cancelar </v-btn>
+              <v-btn color="green" outlined @click="save"> Gardar </v-btn>
+            </v-card-actions>
+          </v-card>
         </v-dialog>
         <v-dialog v-model="dialogDelete" max-width="500px">
           <v-card>
@@ -110,7 +108,7 @@
         color="yellow"
         small
         class="mr-2"
-        @click="editItem(item), (editedIndex = 1),get(), getMunicipios()"
+        @click="editItem(item), (editedIndex = 1), get(), getMunicipios()"
       >
         mdi-pencil
       </v-icon>
@@ -163,9 +161,9 @@ export default {
     editedItem: {
       name: "",
       ubicacion: 0,
-      pkCountry: '',
-      pkProvince: '',
-      pkState: '',
+      pkCountry: "",
+      pkProvince: "",
+      pkState: "",
     },
   }),
 
@@ -206,6 +204,8 @@ export default {
     // },
 
     initialize() {
+      var obj = this;
+
       var myHeaders = new Headers();
       myHeaders.append("Authorization", "Bearer " + sessionStorage.token + "");
       myHeaders.append("Cookie", "lang=en");
@@ -218,7 +218,7 @@ export default {
 
       async function asyncData() {
         const response = await fetch(
-          "http://localhost:3001/api/establecimientos",
+          `${obj.$store.state.url}establecimientos`,
           requestOptions
         );
         const data = await response.json();
@@ -231,15 +231,20 @@ export default {
       result.then((data) => {
         this.establecimientos = data;
         this.establecimientos = this.establecimientos.result;
-       // console.log(this.establecimientos);
+        console.log(data);
       });
-    
+
+      setTimeout(() =>{
+        this.comprueba()
+      },7300000)
     },
-  
+     comprueba(){
+          console.log(sessionStorage.token)
+     },
     editItem(item) {
       this.editedItem = item;
       this.pkItem = item.id;
-    
+
       this.dialog = true;
     },
 
@@ -292,8 +297,7 @@ export default {
 
     save() {
       if (this.editedIndex > -1) {
-     
-       // alert(this.editedItem.pkState)
+        // alert(this.editedItem.pkState)
         var myHeaders = new Headers();
         myHeaders.append(
           "Authorization",
@@ -305,11 +309,11 @@ export default {
           name: this.editedItem.name,
           ubicacion: this.editedItem.ubicacion,
           fkpais: this.editedItem.pkCountry,
-          fkprovincia:this.editedItem.pkProvince,
+          fkprovincia: this.editedItem.pkProvince,
           fklocalidad: this.editedItem.pkState,
           fkusuario: sessionStorage.id,
         });
-             
+
         var requestOptions = {
           method: "PUT",
           headers: myHeaders,
@@ -342,7 +346,7 @@ export default {
           ubicacion: this.editedItem.ubicacion,
           fkpais: this.editedItem.pkCountry,
           fkprovincia: this.editedItem.pkProvince,
-          fklocalidad:this.editedItem.pkState,
+          fklocalidad: this.editedItem.pkState,
           fkusuario: sessionStorage.id,
         });
 

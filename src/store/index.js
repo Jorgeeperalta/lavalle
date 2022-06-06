@@ -2,15 +2,22 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 Vue.use(Vuex);
-
+import { API_URL } from "@/common/config";
 export default new Vuex.Store({
   state: {
     province: [],
     provincias: [],
     municipio: [],
     municipios: [],
+    url: ''
   },
   mutations: {
+    logout(){
+      sessionStorage.removeItem('token');
+    },
+    url(state){
+       state.url =  API_URL
+    },
     getMunicipios(state) {
       try {
         async function asyncData() {

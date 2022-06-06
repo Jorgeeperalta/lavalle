@@ -16,7 +16,7 @@ export default {
     //
   }),
   mounted(){
-  //  get()
+    this.$store.commit("url");
   }
 };
 </script>

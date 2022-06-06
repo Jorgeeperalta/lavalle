@@ -10,7 +10,7 @@
         <h3 style="text-align: center">{{ title }}</h3>
 
         <v-spacer></v-spacer>
-
+        <v-icon @click="logout()">mdi-logout</v-icon>
         <!-- <v-responsive max-width="156">
           <v-text-field
             dense
@@ -210,38 +210,79 @@ export default {
     numero: 0,
     title: "",
     pantalla: [
-      {
-        id: 1,
-        name: "ESTABLECIMIENTOS",
-        mdi: "mdi-checkbox-blank-outline",
-        color: "red lighten-1",
-      },
-      {
-        id: 2,
-        name: "POTREROS",
-        mdi: "mdi-shape-polygon-plus",
-        color: "purple lighten-2",
-      },
-      { id: 3, name: "ANIMALES", mdi: "mdi-cow", color: "blue lighten-1" },
-      {
-        id: 4,
-        name: "GRUPOS/CATEGORIAS",
-        mdi: "mdi-sitemap",
-        color: "teal lighten-1",
-      },
-      {
-        id: 5,
-        name: "PANEL DE CONTROL",
-        mdi: "mdi-timetable",
-        color: "lime accent-3",
-      },
+      // {
+      //   id: 1,
+      //   name: "ESTABLECIMIENTOS",
+      //   mdi: "mdi-checkbox-blank-outline",
+      //   color: "red lighten-1",
+      // },
+      // {
+      //   id: 2,
+      //   name: "POTREROS",
+      //   mdi: "mdi-shape-polygon-plus",
+      //   color: "purple lighten-2",
+      // },
+      // { id: 3, name: "ANIMALES", mdi: "mdi-cow", color: "blue lighten-1" },
+      // {
+      //   id: 4,
+      //   name: "GRUPOS/CATEGORIAS",
+      //   mdi: "mdi-sitemap",
+      //   color: "teal lighten-1",
+      // },
+      // {
+      //   id: 5,
+      //   name: "PANEL DE CONTROL",
+      //   mdi: "mdi-timetable",
+      //   color: "lime accent-3",
+      // },
     ],
   }),
   computed: {},
   mounted() {
     this.usuarioNombre = sessionStorage.user;
+    console.log(this.usuarioNombre);
+    this.initialize();
   },
   methods: {
+    logout() {
+       this.$store.commit("logout");
+         window.location = "/";
+    },
+    initialize() {
+      
+      var myHeaders = new Headers();
+      myHeaders.append("Authorization", "Bearer " + sessionStorage.token + "");
+      myHeaders.append("Cookie", "lang=en");
+
+      var requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow",
+      };
+     
+        async function asyncData() {
+          const response = await fetch(
+            "http://localhost:3001/api/pantallas",
+            requestOptions
+          );
+          const data = await response.json();
+
+          return data;
+        }
+
+        const result = asyncData();
+
+        result.then((data) => {
+          this.pantalla = data;
+          this.pantalla = this.pantalla.result;
+          console.log(data);
+        });
+       setTimeout(() => {
+           if (this.pantalla=='') {
+               window.location = "/login";
+       }
+       },500)
+    },
     content(n) {
       this.numero = n;
       //   console.log(n);
