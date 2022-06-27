@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-sheet id="scrolling-techniques-4" class="overflow-y-auto">
-    <v-app-bar
+      <v-app-bar
         absolute
         color="purple accent-4"
         dark
@@ -18,10 +18,9 @@
             gradient="to top right, rgba(55,236,186,.7), rgba(25,32,72,.7)"
           ></v-img>
         </template>
-        <v-btn icon  href="/login">
-          <v-icon >mdi-account</v-icon>
+        <v-btn icon href="/login">
+          <v-icon>mdi-account</v-icon>
         </v-btn>
-       
 
         <v-spacer></v-spacer>
       </v-app-bar>
@@ -33,17 +32,15 @@
           <template>
             <v-parallax
               dark
-                 src="https://picsum.photos/1920/1080?random"
+              src="https://picsum.photos/1920/1080?random"
               height="900"
             >
               <v-row align="center" justify="center">
                 <v-col class="text-center" cols="12">
                   <h1 class="display-4 font-weight-thin mb-3">
-                   General Lavalle
+                    General Lavalle
                   </h1>
-                  <h4 class="subheading">
-                    Sistema integral ganadero
-                  </h4>
+                  <h4 class="subheading">Sistema integral ganadero</h4>
                 </v-col>
               </v-row>
             </v-parallax>
@@ -87,9 +84,7 @@
                     </v-img>
 
                     <v-card-text class="targeta">
-                      <div class="font-weight-bold ml-8 mb-2">
-                        Today
-                      </div>
+                      <div class="font-weight-bold ml-8 mb-2">Today</div>
 
                       <v-timeline align-top dense>
                         <v-timeline-item
@@ -149,9 +144,7 @@
                     </v-img>
 
                     <v-card-text class="targeta">
-                      <div class="font-weight-bold ml-8 mb-2">
-                        Today
-                      </div>
+                      <div class="font-weight-bold ml-8 mb-2">Today</div>
 
                       <v-timeline align-top dense>
                         <v-timeline-item
@@ -180,7 +173,7 @@
       </div>
       <v-row>
         <v-col md="6">
-          <div style="width: 70%; margin: 0px auto;">
+          <div style="width: 70%; margin: 0px auto">
             <br />
             <h4>UN PLAN A TU MEDIDA</h4>
             <h1>Estás a un paso de una vida más sana y activa</h1>
@@ -221,7 +214,7 @@
       <v-row>
         <v-row class="inner">
           <v-col md="6">
-            <div style="width: 70%; margin: 0px auto;">
+            <div style="width: 70%; margin: 0px auto">
               <br />
               <h1>{{ encadireccion }}</h1>
               <br />
@@ -233,7 +226,7 @@
             <template>
               <vl-map
                 data-projection="EPSG:4326"
-                style="height: 360px;  width: 780px"
+                style="height: 360px; width: 780px"
               >
                 <vl-view
                   :zoom.sync="zoom"
@@ -270,7 +263,7 @@
       </v-row>
       <v-row>
         <v-col md="6">
-          <div style="width: 70%; margin: 0px auto;">
+          <div style="width: 70%; margin: 0px auto">
             <h1>
               Encontranos en nuestras redes sociales para conocer más sobre
               nuestra sede y poder contactarnos. Todos Los Derechos Reservados
@@ -278,7 +271,7 @@
           </div>
         </v-col>
         <v-col md="6">
-          <div style="width: 70%; margin: 0px auto;"></div>
+          <div style="width: 70%; margin: 0px auto"></div>
         </v-col>
       </v-row>
     </div>
