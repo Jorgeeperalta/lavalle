@@ -11,27 +11,18 @@
 
         <v-spacer></v-spacer>
         <v-icon @click="logout()">mdi-logout</v-icon>
-        <!-- <v-responsive max-width="156">
-          <v-text-field
-            dense
-            flat
-            hide-details
-            rounded
-            solo-inverted
-            background-color="grey lighten-2"
-          ></v-text-field>
-        </v-responsive> -->
 
         <div id="settings-wrapper">
           <v-menu
             rounded="lg"
-            style="margin-top: -150px"
+            style="margin-top: -180px;margin-left: 50px;"
             v-model="menu"
             :close-on-content-click="false"
             :nudge-width="200"
-            nudge-left="20"
-            offset-y
-            origin="top right"
+            nudge-left="40px"
+            offset-x
+           z-index="500px"
+            origin="top"
             content-class="v-settings"
           >
             <template v-slot:activator="{ on, attrs }">
@@ -142,14 +133,7 @@
           color="grey lighten-1"
           size="28"
         >
-          <h4
-            onMouseover="this.style.color='red'"
-            onMouseout="this.style.color='black'"
-            style="text-align: left"
-            outlined
-            @click="content(n)"
-            block
-          >
+          <h4 style="text-align: left" outlined @click="content(n)" block>
             <v-icon :color="n.color">{{ n.mdi }}</v-icon>
             {{ n.name }}
           </h4>
@@ -242,13 +226,13 @@ export default {
     this.usuarioNombre = sessionStorage.user;
     console.log(this.usuarioNombre);
     this.initialize();
-    this.comprueba()
+    this.comprueba();
   },
   methods: {
-    comprueba(){
-       if(!sessionStorage.token){
-             window.location = "/";
-       }
+    comprueba() {
+      if (!sessionStorage.token) {
+        window.location = "/";
+      }
     },
     logout() {
       this.$store.commit("logout");

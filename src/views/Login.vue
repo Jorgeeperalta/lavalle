@@ -1,58 +1,56 @@
 <template>
   <v-app>
-    <v-img :src="require('@/assets/86708-vacas.jpg')">
+    <div class="fondo">
       <div style="margin-top: 150px">
         <v-card
-          color="light-green lighten-2"
+          color=""
           darkfull-header
           class="mx-auto"
-          max-width="400"
-          height="400"
+          max-width="330"
+          height="450"
+          elevation="24"
           v-if="recuperar == 0"
-        >
-          <v-card-title class="text-h5 grey lighten-2"> Login </v-card-title>
+        >  
+     
+          <p class="ptitle">Ingresar</p>
 
-          <!-- <v-parallax
-        src="https://imgsvr.radiocut.site/get/thumb/600/600/cuts_logos/d5/6c/d56c8368-b37f-4997-8cf6-328b2262cdcd.jpg"
-      > -->
-          <br /><br />
+          <p class="psubtitle">Email / Contraseña</p>
+         <v-divider></v-divider>
+         <br><br>
+          <v-form ref="form" v-model="valid" lazy-validation>
+            <v-container>
+              <v-row>
+                <v-col cols="12" sm="12">
+                  <v-text-field
+                    v-model="usuario"
+                    label="EMAIL"
+                    counter
+                    required
+                    :rules="emailRules"
+                    append-icon="mdi-email"
+                  >
+                  </v-text-field>
+                  <div prepend-icon="email"></div>
+                </v-col>
+                <br />
 
-          <template>
-            <v-form ref="form" v-model="valid" lazy-validation>
-              <v-container>
-                <v-row>
-                  <v-col cols="12" sm="12">
-                    <v-text-field
-                      v-model="usuario"
-                      label="Email"
-                      hint=""
-                      counter
-                      required
-                      :rules="emailRules"
-                    >
-                    </v-text-field>
-                    <div prepend-icon="email"></div>
-                  </v-col>
-                  <br />
-
-                  <v-col cols="12" sm="12">
-                    <v-text-field
-                      v-model="password"
-                      :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-                      :rules="[rules.required, rules.min]"
-                      :type="show1 ? 'text' : 'password'"
-                      name="input-10-1"
-                      label="INGRESE PASSWORD"
-                      hint="At least 8 characters"
-                      counter
-                      @click:append="show1 = !show1"
-                      v-on:keyup.enter="comprobar"
-                    ></v-text-field>
-                  </v-col>
-                </v-row>
-              </v-container>
-            </v-form>
-          </template>
+                <v-col cols="12" sm="12">
+                  <v-text-field
+                    v-model="password"
+                    :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+                    :rules="[rules.required, rules.min]"
+                    :type="show1 ? 'text' : 'password'"
+                    name="input-10-1"
+                    label="CONTRASEÑA"
+                    hint="At least 8 characters"
+                    counter
+                    @click:append="show1 = !show1"
+                    v-on:keyup.enter="comprobar"
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-form>
 
           <v-card-text class="text--primary">
             <div></div>
@@ -61,17 +59,27 @@
           </v-card-text>
 
           <v-card-actions>
-            <v-btn color="lime accent-3" text @click="comprobar">
+            <v-btn
+              style="margin-top: 40px"
+              color="black"
+              text
+              @click="comprobar"
+            >
               Ingresar
             </v-btn>
 
-            <v-btn color="blue lighten-4" text @click="mustraPantalla()">
+            <v-btn
+              style="margin-left: 90px; margin-top: 40px"
+              color="black"
+              text
+              @click="mustraPantalla()"
+            >
               Registrarse
             </v-btn>
           </v-card-actions>
         </v-card>
       </div>
-    </v-img>
+    </div>
   </v-app>
 </template>
 
@@ -93,7 +101,7 @@ export default {
     valid: "",
     next: "NO",
     password: "12345678",
-    usuario: "admin",
+    usuario: "example@gmail.com",
     rules: {
       required: (value) => !!value || "Requerido.",
       min: (v) => v.length >= 8 || "Minimo 8 caracteres",
@@ -102,7 +110,7 @@ export default {
   created() {},
   methods: {
     comprobar() {
-      console.log(this.$store.state.url)
+      console.log(this.$store.state.url);
       var obj = this;
 
       sessionStorage.token = 1;
@@ -147,8 +155,6 @@ export default {
       }
     },
 
-   
-
     muestraPantalla() {
       if (sessionStorage.token == "undefined") {
         this.$swal
@@ -180,3 +186,19 @@ export default {
   },
 };
 </script>
+<style scoped>
+.ptitle {
+  text-align: center;
+  color: rgb(6, 6, 6);
+  font-size: 22px;
+ 
+}
+.psubtitle {
+  text-align: center;
+}
+.fondo {
+  background-image: url("../assets/86708-vacas.jpg");
+
+  height: 900px;
+}
+</style>
