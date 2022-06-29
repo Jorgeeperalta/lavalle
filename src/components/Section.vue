@@ -1,33 +1,27 @@
 <template>
-  
-    <v-container>
+  <v-container>
     <div class="divsection">
-        <v-row>
-            <v-col md="12">  
-               <h2>MEDIOS DE COMUNICACIÓN SOCIAL</h2>
-            </v-col> 
-
-        </v-row>
+      <v-row>
+        <v-col md="12">
+          <h2>MEDIOS DE COMUNICACIÓN SOCIAL</h2>
+        </v-col>
+      </v-row>
     </div>
-    
-    </v-container>
-   
+  </v-container>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style scoped>
-h1{
-    text-align: center
+h1 {
+  text-align: center;
 }
 .divsection {
   margin-top: -55px;
   background-color: #dfcbe4;
   height: 300px;
-  text-align: center
+  text-align: center;
 }
 </style>

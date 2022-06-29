@@ -1,5 +1,5 @@
 ## lavalle es un proyecto de administracion ganadera (en desarrollo)
-La tecnologia que se esta utilizando en este proyecto de el tipo SPA con el framework Vuejs junto con Vuetify para la hoja de estilos.
+La tecnologia que se esta utilizando en este proyecto es de el tipo SPA con el framework Vuejs junto con Vuetify para la hoja de estilos.
 
 * Su base de datos es del tipo relacional (Mysql).
 

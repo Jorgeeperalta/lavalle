@@ -6,8 +6,8 @@
 <script>
 // @ is an alias to /src
 import Inicio from '@/components/Inicio.vue'
-import Barra from "../components/Barra.vue";
-import Tab from "../components/Tab.vue"
+import Barra from "@/components/Barra.vue";
+import Tab from "@/components/Tab.vue"
 
 export default {
   name: 'Home',

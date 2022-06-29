@@ -9,15 +9,13 @@
           max-width="330"
           height="450"
           elevation="24"
-          v-if="recuperar == 0"
-        >  
-     
+        >
           <p class="ptitle">Ingresar</p>
 
           <p class="psubtitle">Email / Contraseña</p>
-         <v-divider></v-divider>
-         <br><br>
-          <v-form ref="form" v-model="valid" lazy-validation>
+          <v-divider></v-divider>
+          <br /><br />
+          <v-form  lazy-validation>
             <v-container>
               <v-row>
                 <v-col cols="12" sm="12">
@@ -52,12 +50,6 @@
             </v-container>
           </v-form>
 
-          <v-card-text class="text--primary">
-            <div></div>
-
-            <div></div>
-          </v-card-text>
-
           <v-card-actions>
             <v-btn
               style="margin-top: 40px"
@@ -87,19 +79,12 @@
 export default {
   components: {},
   data: () => ({
-    ruta: "",
     emailRules: [
       (v) => !!v || "E-mail o nombre de usuario es requerido",
       (v) => /.+@.+/.test(v) || "E-mail must be valid",
     ],
     dataLogin: [],
-    recuperar: 0,
-    snackbar: false,
-    text: `Error de usuario o contraseña`,
     show1: false,
-    aux_next: "",
-    valid: "",
-    next: "NO",
     password: "12345678",
     usuario: "example@gmail.com",
     rules: {
@@ -115,16 +100,16 @@ export default {
 
       sessionStorage.token = 1;
       if (this.usuario != "" && this.password != "") {
-        var myHeaders = new Headers();
+        const myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         myHeaders.append("Cookie", "lang=en");
 
-        var raw = JSON.stringify({
+        const raw = JSON.stringify({
           email: this.usuario,
           password: this.password,
         });
 
-        var requestOptions = {
+        const requestOptions = {
           method: "POST",
           headers: myHeaders,
           redirect: "follow",
@@ -191,7 +176,6 @@ export default {
   text-align: center;
   color: rgb(6, 6, 6);
   font-size: 22px;
- 
 }
 .psubtitle {
   text-align: center;

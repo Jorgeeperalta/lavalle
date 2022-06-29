@@ -9,13 +9,13 @@ export default new Vuex.Store({
     provincias: [],
     municipio: [],
     municipios: [],
-    url: API_URL
+    url: API_URL,
   },
   mutations: {
-    logout(){
-      sessionStorage.removeItem('token');
+    logout() {
+      sessionStorage.removeItem("token");
     },
-   
+
     getMunicipios(state) {
       try {
         async function asyncData() {
@@ -29,17 +29,15 @@ export default new Vuex.Store({
         result.then((data) => {
           console.log(data);
           state.municipio = data;
-        //  console.log(state.municipio);
         });
       } catch (e) {
         console.log(e);
       }
       setTimeout(function () {
         state.municipios = state.municipio.localidades;
-      //  console.log(state.municipios);
       }, 1000);
     },
-    get(state) {
+    getProvincias(state) {
       try {
         async function asyncData() {
           const response = await fetch(
@@ -50,9 +48,7 @@ export default new Vuex.Store({
         }
         const result = asyncData();
         result.then((data) => {
-       //   console.log(data);
           state.province = data;
-          //console.log(state.province);
         });
       } catch (e) {
         console.log(e);

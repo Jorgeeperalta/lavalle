@@ -7,7 +7,7 @@
         </v-icon>
         <v-spacer></v-spacer>
 
-        <h3 style="text-align: center">{{ title }}</h3>
+        <h3 style="text-align: center">{{ tituloPantalla }}</h3>
 
         <v-spacer></v-spacer>
         <v-icon @click="logout()">mdi-logout</v-icon>
@@ -15,13 +15,13 @@
         <div id="settings-wrapper">
           <v-menu
             rounded="lg"
-            style="margin-top: -180px;margin-left: 50px;"
+            style="margin-top: -180px; margin-left: 50px"
             v-model="menu"
             :close-on-content-click="false"
             :nudge-width="200"
             nudge-left="40px"
             offset-x
-           z-index="500px"
+            z-index="500px"
             origin="top"
             content-class="v-settings"
           >
@@ -127,15 +127,20 @@
         <v-divider color="white" class="mx-3 my-5"></v-divider>
 
         <div
-          v-for="n in pantalla"
-          :key="n.id"
+          v-for="item in pantallas"
+          :key="item.id"
           class="d-block text-center mx-auto mb-1"
           color="grey lighten-1"
           size="28"
         >
-          <h4 style="text-align: left" outlined @click="content(n)" block>
-            <v-icon :color="n.color">{{ n.mdi }}</v-icon>
-            {{ n.name }}
+          <h4
+            style="text-align: left"
+            outlined
+            @click="pantallaElegida(item)"
+            block
+          >
+            <v-icon :color="item.color">{{ item.mdi }}</v-icon>
+            {{ item.name }}
           </h4>
         </div>
       </v-navigation-drawer>
@@ -146,14 +151,14 @@
             <v-col>
               <v-lazy
                 dark
-                v-if="title == 'ESTABLECIMIENTOS'"
+                v-if="tituloPantalla == 'ESTABLECIMIENTOS'"
                 style="margin-top: -50px"
                 color="grey darken-1"
                 min-height="70vh"
                 rounded="xl"
                 @click="(drawer = false), (mini = !mini)"
               >
-                <establecimientos></establecimientos>
+                <Establecimientos></Establecimientos>
               </v-lazy>
             </v-col>
           </v-row>
@@ -169,7 +174,6 @@
             rounded
             solo
           ></v-text-field>
-          <!-- <v-btn>Buscar</v-btn> -->
         </v-footer>
       </v-responsive>
     </v-img>
@@ -177,49 +181,21 @@
 </template>
 
 <script>
-import establecimientos from "../components/Establecimientos.vue";
+import Establecimientos from "@/components/Establecimientos.vue";
 export default {
   components: {
-    establecimientos,
+    Establecimientos,
   },
   data: () => ({
     hidden: false,
     fav: true,
     menu: false,
-    message: false,
     hints: true,
     usuarioNombre: "",
     drawer: true,
     mini: true,
-    numero: 0,
-    title: "",
-    pantalla: [
-      // {
-      //   id: 1,
-      //   name: "ESTABLECIMIENTOS",
-      //   mdi: "mdi-checkbox-blank-outline",
-      //   color: "red lighten-1",
-      // },
-      // {
-      //   id: 2,
-      //   name: "POTREROS",
-      //   mdi: "mdi-shape-polygon-plus",
-      //   color: "purple lighten-2",
-      // },
-      // { id: 3, name: "ANIMALES", mdi: "mdi-cow", color: "blue lighten-1" },
-      // {
-      //   id: 4,
-      //   name: "GRUPOS/CATEGORIAS",
-      //   mdi: "mdi-sitemap",
-      //   color: "teal lighten-1",
-      // },
-      // {
-      //   id: 5,
-      //   name: "PANEL DE CONTROL",
-      //   mdi: "mdi-timetable",
-      //   color: "lime accent-3",
-      // },
-    ],
+    tituloPantalla: "",
+    pantallas: [],
   }),
   computed: {},
   mounted() {
@@ -262,20 +238,18 @@ export default {
       const result = asyncData();
 
       result.then((data) => {
-        this.pantalla = data;
-        this.pantalla = this.pantalla.result;
+        this.pantallas = data;
+        this.pantallas = this.pantallas.result;
         console.log(data);
       });
       setTimeout(() => {
-        if (this.pantalla == "") {
+        if (this.pantallas == "") {
           window.location = "/login";
         }
       }, 500);
     },
-    content(n) {
-      this.numero = n;
-      //   console.log(n);
-      this.title = n.name;
+    pantallaElegida(n) {
+      this.tituloPantalla = n.name;
     },
   },
 };

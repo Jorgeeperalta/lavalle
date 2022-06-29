@@ -7,15 +7,13 @@
   >
     <template v-slot:top>
       <v-toolbar flat>
-        <v-toolbar-title outlined color="" flat
-          >ESTABLECIMIENTOS</v-toolbar-title
-        >
+        <v-toolbar-title outlined flat>ESTABLECIMIENTOS</v-toolbar-title>
         <v-divider color="white" class="mx-4" inset vertical></v-divider>
-        <v-spacer></v-spacer>
+
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ on, attrs }">
             <v-btn
-              @click="get(), getMunicipios(), (editedIndex = -1)"
+              @click="getProvincias(), getMunicipios(), (editedIndex = -1)"
               outlined
               color="green"
               class="mb-2"
@@ -108,7 +106,9 @@
         color="yellow"
         small
         class="mr-2"
-        @click="editItem(item), (editedIndex = 1), get(), getMunicipios()"
+        @click="
+          editItem(item), (editedIndex = 1), getProvincias(), getMunicipios()
+        "
       >
         mdi-pencil
       </v-icon>
@@ -121,7 +121,6 @@
 </template>
 
 <script>
-//import { get } from "../getProvince";
 export default {
   data: () => ({
     establecimientos: [],
@@ -184,7 +183,7 @@ export default {
 
   created() {
     this.initialize();
-    this.$store.commit("get");
+    this.$store.commit("getProvincias");
     this.$store.commit("getMunicipios");
   },
   mounted() {
@@ -192,16 +191,12 @@ export default {
   },
 
   methods: {
-    get() {
+    getProvincias() {
       this.province = this.$store.state.provincias;
     },
     getMunicipios() {
       this.municipios = this.$store.state.municipios;
     },
-    // getProvince() {
-    //   var aux = JSON.parse(localStorage.getItem("provincias"));
-    //   this.province = aux.provincias;
-    // },
 
     initialize() {
       var obj = this;
@@ -256,17 +251,17 @@ export default {
     },
 
     deleteItemConfirm() {
-      var myHeaders = new Headers();
+      const myHeaders = new Headers();
       myHeaders.append("Authorization", "Bearer " + sessionStorage.token + "");
 
-      var requestOptions = {
+      const requestOptions = {
         method: "DELETE",
         headers: myHeaders,
 
         redirect: "follow",
       };
 
-      var promise = Promise.race([
+      const promise = Promise.race([
         fetch(
           "http://localhost:3001/api/establecimientos/" + this.pkItem,
           requestOptions
@@ -299,15 +294,14 @@ export default {
 
     save() {
       if (this.editedIndex > -1) {
-        // alert(this.editedItem.pkState)
-        var myHeaders = new Headers();
+        const myHeaders = new Headers();
         myHeaders.append(
           "Authorization",
           "Bearer " + sessionStorage.token + ""
         );
         myHeaders.append("Content-Type", "application/json");
 
-        var raw = JSON.stringify({
+        const raw = JSON.stringify({
           name: this.editedItem.name,
           ubicacion: this.editedItem.ubicacion,
           fkpais: this.editedItem.pkCountry,
@@ -316,14 +310,14 @@ export default {
           fkusuario: sessionStorage.id,
         });
 
-        var requestOptions = {
+        const requestOptions = {
           method: "PUT",
           headers: myHeaders,
           body: raw,
           redirect: "follow",
         };
 
-        var promise = Promise.race([
+        const promise = Promise.race([
           fetch(
             "http://localhost:3001/api/establecimientos/" + this.pkItem,
             requestOptions
@@ -336,14 +330,14 @@ export default {
         promise.then((result) => console.log(result), this.initialize()),
           promise.catch((error) => console.log(error));
       } else {
-        var myHeaders = new Headers();
+        const myHeaders = new Headers();
         myHeaders.append(
           "Authorization",
           "Bearer " + sessionStorage.token + ""
         );
         myHeaders.append("Content-Type", "application/json");
 
-        var raw = JSON.stringify({
+        const raw = JSON.stringify({
           name: this.editedItem.name,
           ubicacion: this.editedItem.ubicacion,
           fkpais: this.editedItem.pkCountry,
@@ -352,14 +346,14 @@ export default {
           fkusuario: sessionStorage.id,
         });
 
-        var requestOptions = {
+        const requestOptions = {
           method: "POST",
           headers: myHeaders,
           body: raw,
           redirect: "follow",
         };
 
-        var promise = Promise.race([
+        const promise = Promise.race([
           fetch(
             "http://localhost:3001/api/establecimientos",
             requestOptions
@@ -377,8 +371,4 @@ export default {
   },
 };
 </script>
-<style scoped>
-.bgTables {
-  background-color: rgb(0, 0, 0);
-}
-</style>
+<style scoped></style>
